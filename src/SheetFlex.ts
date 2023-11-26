@@ -1,5 +1,5 @@
 import Driver from "./driver";
-import { findAll } from "./functions";
+import { _find, _findAll, _findOne } from "./functions";
 
 export interface GoogleAuthCredentials {
   /**
@@ -54,13 +54,15 @@ export class SheetFlex {
   async collection(collectionName: string){
     let error: any;
     const sheetExistance: boolean = await this.driver.isSheetExist(collectionName);
-    if(!sheetExistance) error.message =  `The collection with the name ${collectionName} does not exist or something went wrong`;
+    if(!sheetExistance) error = { message:  `The collection with the name ${collectionName} does not exist or something went wrong` }
     return {
       /**
        * 
        * @returns returns all the data in the collection.
        */
-      findAll: () => findAll(this.driver, collectionName, error),
+      findAll: () => _findAll(this.driver, collectionName, error),
+      find: (predicate) => _find(this.driver, collectionName, error, predicate),
+      findOne: (predicate) => _findOne(this.driver, collectionName, error, predicate),
     }
   }
 }
