@@ -17,3 +17,6 @@ lib
 .vs
 bin
 obj
+ 
+# this is for ignore the npm pack file
+*.tgz 

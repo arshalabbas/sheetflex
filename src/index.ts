@@ -1,3 +1,3 @@
-import { SheetFlex } from "./main/SheetFlex";
+import { SheetFlex } from "./SheetFlex";
 
 export default SheetFlex;

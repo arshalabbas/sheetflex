@@ -1,4 +1,5 @@
 import Driver from "./driver";
+import { findAll } from "./functions";
 
 export interface GoogleAuthCredentials {
   /**
@@ -26,7 +27,7 @@ export class SheetFlex {
   private privateKey: string;
   sheetsID: string;
   
-  driver: Driver;
+  private driver: Driver;
 
   /**
    * Creates a new SheetFlex instance.
@@ -43,5 +44,23 @@ export class SheetFlex {
     this.sheetsID = sheetsID;
 
     this.driver = new Driver(credentials, sheetsID);
+  }
+
+  /**
+   * 
+   * @param collectionName - the collection name to work on.
+   * @returns
+   */
+  async collection(collectionName: string){
+    let error: any;
+    const sheetExistance: boolean = await this.driver.isSheetExist(collectionName);
+    if(!sheetExistance) error.message =  `The collection with the name ${collectionName} does not exist or something went wrong`;
+    return {
+      /**
+       * 
+       * @returns returns all the data in the collection.
+       */
+      findAll: () => findAll(this.driver, collectionName, error),
+    }
   }
 }
