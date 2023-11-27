@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@googleapis/sheets": "^5.0.5",
-    "googleapis": "^128.0.0"
+    "googleapis": "^128.0.0",
+    "uuid": "^9.0.1"
   }
 }
